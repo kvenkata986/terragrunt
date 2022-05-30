@@ -6,5 +6,5 @@ terraform {
 inputs = {
   s3_bucket_name      = "test-bucket-atlantis-meetup-future-2022"
   tagname             = "test"
-  region              = "us-east-1"
+  aws_region              = "us-east-1"
 }
