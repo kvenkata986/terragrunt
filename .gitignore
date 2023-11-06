@@ -1,0 +1,10 @@
+.terragrunt-cache
+.DS_Store
+/venv
+*.tfstate
+.terragrunt-script.tmp
+.terragrunt_tmp
+.terraform.zip
+/.tmp/
+.terraform.lock.hcl
+/.vscode/*
