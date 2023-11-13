@@ -1,6 +1,6 @@
 terraform {
   source = "git::git@github.com:kvenkata986/terraform.git//services/eks?ref=main"
-  # source = "../../../../terraform//services/eks"
+  #source = "../../../../terraform//services/eks"
 }
 
 include {
