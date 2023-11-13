@@ -1,6 +1,6 @@
 terraform {
-  source = "git::git@github.com:kvenkata986/terraform.git//services/eks?ref=main"
-  #source = "../../../../terraform//services/eks"
+  #source = "git::git@github.com:kvenkata986/terraform.git//services/eks?ref=main"
+  source = "../../../../terraform//services/eks"
 }
 
 include {
@@ -14,7 +14,7 @@ dependency "vpc" {
 inputs = {
   name               = "meetup"
   private_subnet_ids = dependency.vpc.outputs.private_subnet_ids
-  eks_version        = "1.27"
+  eks_version        = "1.26"
 
   node_groups = {
     "node-group-1" = {
@@ -37,7 +37,7 @@ inputs = {
     }
   }
 
-  eks_addon_version_kube_proxy     = "v1.27.1-eksbuild.1"
-  eks_addon_version_ebs_csi_driver = "v1.24.0-eksbuild.1"
+  eks_addon_version_kube_proxy     = "v1.26.2-eksbuild.1"
+  #eks_addon_version_ebs_csi_driver = "v1.24.0-eksbuild.1"
   #eks_addon_version_kubecost       = "v1.103.3-eksbuild.0"
 }
