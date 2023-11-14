@@ -1,34 +1,24 @@
 version: 3
-
 automerge: true
-
-workflows:
-  main:
-    plan:
-      steps:
-        - run: terragrunt plan
-    apply:
-      steps:
-        - run: terragrunt apply
-
 projects:
   - name: meetup--us-east-1--eks
     dir: meetup/us-east-1/eks
+    workflow: tf1.5b
     terraform_version: v1.3.6
     autoplan:
       when_modified:
         - '**/**'
-
   - name: meetup--us-east-1--vpc
     dir: meetup/us-east-1/vpc
     terraform_version: v1.3.6
+    workflow: tf1.5b
     autoplan:
       when_modified:
         - '**/**'
-
   - name: meetup--us-east-1--s3_bucket
     dir: meetup/us-east-1/s3_bucket
     terraform_version: v1.3.6
+    workflow: tf1.5b
     autoplan:
       when_modified:
         - '**/**'
