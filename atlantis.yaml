@@ -2,6 +2,15 @@ version: 3
 
 automerge: true
 
+workflows:
+  main:
+    plan:
+      steps:
+        - run: terragrunt plan
+    apply:
+      steps:
+        - run: terragrunt apply
+
 projects:
   - name: meetup--us-east-1--eks
     dir: meetup/us-east-1/eks
@@ -10,13 +19,7 @@ projects:
       when_modified:
         - '**/**'
     workflows:
-      main:
-        plan:
-          steps:
-            - run: terragrunt plan
-        apply:
-          steps:
-            - run: terragrunt apply
+      - main
 
   - name: meetup--us-east-1--vpc
     dir: meetup/us-east-1/vpc
@@ -25,13 +28,7 @@ projects:
       when_modified:
         - '**/**'
     workflows:
-      main:
-        plan:
-          steps:
-            - run: terragrunt plan
-        apply:
-          steps:
-            - run: terragrunt apply
+      - main
 
   - name: meetup--us-east-1--s3_bucket
     dir: meetup/us-east-1/s3_bucket
@@ -40,10 +37,4 @@ projects:
       when_modified:
         - '**/**'
     workflows:
-      main:
-        plan:
-          steps:
-            - run: terragrunt plan
-        apply:
-          steps:
-            - run: terragrunt apply
+      - main
