@@ -8,7 +8,6 @@ projects:
     autoplan:
       when_modified:
         - '**/**'
-
   - name: meetup--us-east-1--vpc
     dir: meetup/us-east-1/vpc
     workflow: default    
