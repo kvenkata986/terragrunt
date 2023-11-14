@@ -3,6 +3,7 @@ automerge: true
 projects:
   - name: meetup--us-east-1--eks
     dir: meetup/us-east-1/eks
+    workflow: default
     terraform_version: v1.3.6
     autoplan:
       when_modified:
@@ -10,6 +11,7 @@ projects:
 
   - name: meetup--us-east-1--vpc
     dir: meetup/us-east-1/vpc
+    workflow: default    
     terraform_version: v1.3.6
     autoplan:
       when_modified:
@@ -17,6 +19,7 @@ projects:
 
   - name: meetup--us-east-1--s3_bucket
     dir: meetup/us-east-1/s3_bucket
+    workflow: default
     terraform_version: v1.3.6
     autoplan:
       when_modified:
