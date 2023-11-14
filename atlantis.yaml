@@ -1,16 +1,5 @@
 version: 3
-
 automerge: true
-
-workflows:
-  main:
-    plan:
-      steps:
-        - run: terragrunt plan
-    apply:
-      steps:
-        - run: terragrunt apply
-
 projects:
   - name: meetup--us-east-1--eks
     dir: meetup/us-east-1/eks
