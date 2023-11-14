@@ -1,4 +1,4 @@
-- id: /.*/
+- id: github.com/kvenkata986/*
   workflow: terragrunt
   allowed_overrides: [workflow]
   allowed_workflows: [terragrunt]
