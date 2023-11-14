@@ -1,14 +1,49 @@
 version: 3
 automerge: true
+repos:
+- id: github.com/kvenkata986/terragrunt/
+  workflow: terragrunt
+  allowed_overrides: [workflow]
+  allowed_workflows: [terragrunt]
+  allow_custom_workflows: false
+workflows:
+  terragrunt:
+    plan:
+      steps:
+      - env:
+          name: TERRAGRUNT_TFPATH
+          command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+      - env:
+          # Reduce Terraform suggestion output
+          name: TF_IN_AUTOMATION
+          value: 'true'
+      - run:
+          # Allow for targetted plans/applies as not supported for Terraform wrappers by default
+          command: terragrunt plan -input=false $(printf '%s' $COMMENT_ARGS | sed 's/,/ /g' | tr -d '\\') -no-color -out $PLANFILE
+          output: hide
+      - run: |
+          terragrunt show $PLANFILE
+    apply:
+      steps:
+      - env:
+          name: TERRAGRUNT_TFPATH
+          command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+      - env:
+          # Reduce Terraform suggestion output
+          name: TF_IN_AUTOMATION
+          value: 'true'
+      - run: terragrunt apply -input=false $PLANFILE
 projects:
   - name: meetup--us-east-1--eks
     dir: meetup/us-east-1/eks
+    workflow: terragrunt
     terraform_version: v1.3.6
     autoplan:
       when_modified:
         - '**/**'
   - name: meetup--us-east-1--vpc
-    dir: meetup/us-east-1/vpc  
+    dir: meetup/us-east-1/vpc
+    workflow: terragrunt
     terraform_version: v1.3.6
     autoplan:
       when_modified:
@@ -16,6 +51,7 @@ projects:
 
   - name: meetup--us-east-1--s3_bucket
     dir: meetup/us-east-1/s3_bucket
+    workflow: terragrunt
     terraform_version: v1.3.6
     autoplan:
       when_modified:
