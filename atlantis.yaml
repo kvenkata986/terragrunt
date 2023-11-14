@@ -1,11 +1,6 @@
 version: 3
 automerge: true
-repos:
-- id: github.com/kvenkata986/terragrunt/
-  workflow: terragrunt
-  allowed_overrides: [workflow]
-  allowed_workflows: [terragrunt]
-  allow_custom_workflows: false
+
 workflows:
   terragrunt:
     plan:
@@ -18,7 +13,7 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run:
-          # Allow for targetted plans/applies as not supported for Terraform wrappers by default
+          # Allow for targeted plans/applies as not supported for Terraform wrappers by default
           command: terragrunt plan -input=false $(printf '%s' $COMMENT_ARGS | sed 's/,/ /g' | tr -d '\\') -no-color -out $PLANFILE
           output: hide
       - run: |
@@ -33,6 +28,7 @@ workflows:
           name: TF_IN_AUTOMATION
           value: 'true'
       - run: terragrunt apply -input=false $PLANFILE
+
 projects:
   - name: meetup--us-east-1--eks
     dir: meetup/us-east-1/eks
@@ -41,6 +37,7 @@ projects:
     autoplan:
       when_modified:
         - '**/**'
+
   - name: meetup--us-east-1--vpc
     dir: meetup/us-east-1/vpc
     workflow: terragrunt
