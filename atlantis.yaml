@@ -8,6 +8,7 @@ projects:
     when_modified:
     - '**/**'
 - name: meetup--us-east-1--vpc
+  dir: meetup/us-east-1/vpc
   terraform_version: v1.3.6
   autoplan:
     when_modified:
