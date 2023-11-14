@@ -1,25 +1,40 @@
 version: 3
 automerge: true
 workflows:
-  # It's important that this is "default".
-  default:
+  terragrunt:
     plan:
       steps:
-        - run: terragrunt plan
+      - env:
+          name: TERRAGRUNT_TFPATH
+          command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+      - env:
+          # Reduce Terraform suggestion output
+          name: TF_IN_AUTOMATION
+          value: 'true'
+      - run:
+          command: terragrunt plan -input=false -out=$PLANFILE
+          output: strip_refreshing
     apply:
       steps:
-        - run: terragrunt apply
+      - env:
+          name: TERRAGRUNT_TFPATH
+          command: 'echo "terraform${ATLANTIS_TERRAFORM_VERSION}"'
+      - env:
+          # Reduce Terraform suggestion output
+          name: TF_IN_AUTOMATION
+          value: 'true'
+      - run: terragrunt apply $PLANFILE
 projects:
   - name: meetup--us-east-1--eks
     dir: meetup/us-east-1/eks
-    workflow: default
+    workflow: terragrunt
     terraform_version: v1.3.6
     autoplan:
       when_modified:
         - '**/**'
   - name: meetup--us-east-1--vpc
     dir: meetup/us-east-1/vpc
-    workflow: default    
+    workflow: terragrunt    
     terraform_version: v1.3.6
     autoplan:
       when_modified:
@@ -27,7 +42,7 @@ projects:
 
   - name: meetup--us-east-1--s3_bucket
     dir: meetup/us-east-1/s3_bucket
-    workflow: default
+    workflow: terragrunt
     terraform_version: v1.3.6
     autoplan:
       when_modified:
