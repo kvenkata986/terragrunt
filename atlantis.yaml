@@ -6,15 +6,12 @@ projects:
   - autoplan:
       enabled: true
       when_modified: ['*.hcl']
-      workflow: terragrunt
     dir: meetup/us-east-1/vpc
   - autoplan:
       enabled: true
       when_modified: ['*.hcl']
-      workflow: terragrunt
     dir: meetup/us-east-1/eks
   - autoplan:
       enabled: true
       when_modified: ['*.hcl']
-      workflow: terragrunt
     dir: meetup/us-east-1/s3_bucket
