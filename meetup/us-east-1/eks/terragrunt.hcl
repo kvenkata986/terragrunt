@@ -22,7 +22,7 @@ inputs = {
       instance_types = ["r7g.large"]
       desired_size   = 1
       max_size       = 1
-      min_size       = 1
+      min_size       = 2
       ami_type       = "CUSTOM"
       image_id       = "ami-0b836913ce5b4839c"
     }
