@@ -29,9 +29,9 @@ inputs = {
     "node-group-2" = {
       name           = "x86"
       instance_types = ["r5.large"]
-      desired_size   = 1
-      max_size       = 1
-      min_size       = 1
+      desired_size   = 2
+      max_size       = 2
+      min_size       = 2
       ami_type       = "CUSTOM"
       image_id       = "ami-03c2f1a52596048c8"
     }
